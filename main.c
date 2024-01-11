@@ -66,7 +66,7 @@ int main(int argc, char *argv[]) {
 	if (argc >= 2) cmd_tablet = cmd_laptop = argv[1];
 	if (argc >= 3) cmd_laptop = argv[2];
 
-	if (geteuid()) FATAL("this utility requires root privileges (did you forget `sudo`?)\n");
+	// if (geteuid()) FATAL("this utility requires root privileges (did you forget `sudo`?)\n");
 
 	const struct libinput_interface file_open_close = {
 		.open_restricted = open_restricted,
