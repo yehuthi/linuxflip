@@ -4,8 +4,8 @@ Detects and executes commands when the computer switches to and from tablet mode
 
 ## Usage
 
-Download the [latest release](https://github.com/yehuthi/linuxflip/releases/latest).
-You can simply run it (requires sudo / root privileges) or hook it to your system (e.g. in `~/.xinitrc`).
+Download the [latest release](https://github.com/yehuthi/linuxflip/releases/latest), and add your user to the `input` group (unless you want to run it as root).
+Then you can simply run it or hook it to your system (e.g. in `~/.xinitrc`).
 
 Run `linuxflip --help` for usage options. The one you're probably interested in is:
 ```
@@ -13,7 +13,7 @@ linuxflip <tablet-cmd> <laptop-cmd>
     Runs <tablet-cmd> in a shell when the mode changes to tablet, and <laptop-cmd> when the mode changes to laptop.
 ```
 
-The commands run in a shell, so shell features are supported, but remember that you're probably going to be running as the `root` user, so don't assume `~` will be substituted for your user's home directory; it's probably going to be `/root`. The commands run asynchronously.
+The commands run in a shell, so shell features are supported. If you'll run as root even through `sudo`, remember to not assume `~` will be substituted for your user's home directory; it's probably going to be `/root`. The commands run asynchronously.
 
 > [!CAUTION]
 > Your commands will run with elevated privileges inherited from the program.
