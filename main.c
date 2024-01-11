@@ -15,7 +15,15 @@ static void close_restricted(int fd, void *user_data) {
 	close(fd);
 }
 
-int main() {
+int main(int argc, char *argv[]) {
+	char* cmd_tablet = "echo tablet";
+	char* cmd_laptop = "echo laptop";
+
+	if (argc >= 2)
+		cmd_tablet = cmd_laptop = argv[1];
+	if (argc >= 3)
+		cmd_laptop = argv[2];
+
 	if (geteuid()) {
 		fprintf(stderr, "Error: this utility requires root privileges (did you forget `sudo`?)\n");
 		return 1;
@@ -49,8 +57,9 @@ int main() {
 			if (libinput_event_get_type(event) != LIBINPUT_EVENT_SWITCH_TOGGLE) continue;
 			struct libinput_event_switch *switch_event = libinput_event_get_switch_event(event);
 			if (libinput_event_switch_get_switch(switch_event) != LIBINPUT_SWITCH_TABLET_MODE) continue;
-			const char switch_on = libinput_event_switch_get_switch_state(switch_event) == LIBINPUT_SWITCH_STATE_ON;
-			printf("%s\n", switch_on ? "TABLET" : "LAPTOP");
+			const char tablet_mode = libinput_event_switch_get_switch_state(switch_event) == LIBINPUT_SWITCH_STATE_ON;
+			if (!fork())
+				exit(system(tablet_mode ? cmd_tablet : cmd_laptop));
 			libinput_event_destroy(event);
 		}
 	}
