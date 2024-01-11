@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1...3.28)
-project(LinuxFlip VERSION 0.1)
+project(LinuxFlip VERSION 0.1.1)
 
 find_package(PkgConfig REQUIRED)
 pkg_search_module(LIBINPUT REQUIRED libinput)
