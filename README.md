@@ -43,3 +43,22 @@ You can pass commands, which can be very handy for trivial setups. For example, 
 ```bash
 linuxflip corekeyboard "killall corekeyboard"
 ```
+
+## Appendix: Disable/Enable Devices
+
+To disable or enable a device, such as a keyboard, the trackpad, etc. use `xinput`:
+```sh
+xinput disable "device name"
+xinput enable "device name"
+```
+
+To find out the device name:
+1. Run `libinput debug-events`. You should see some lines for the connected devices.
+2. Send input from the device (press a button on a keyboard, move the cursor on a mouse, etc.). The terminal should react with new lines.
+3. Note the event number on the first column for the new lines.
+4. Scroll up to the first lines about the connected devices and find the event number there. The third column is the device name.
+
+Now we can disable/enable a device called "device name" on switch by putting the disable/enable commands in the scripts, or directly like this:
+```
+linuxflip 'xinput disable "device name"' 'xinput enable "device name"'
+```
