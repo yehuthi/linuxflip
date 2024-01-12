@@ -52,7 +52,7 @@ xinput disable "device name"
 xinput enable "device name"
 ```
 
-To find out the device name:
+To find out the device name,  you can run `xinput list` and see if you can definitely spot the device there. If it's not obvious:
 1. Run `libinput debug-events`. You should see some lines for the connected devices.
 2. Send input from the device (press a button on a keyboard, move the cursor on a mouse, etc.). The terminal should react with new lines.
 3. Note the event number on the first column for the new lines.
