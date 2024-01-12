@@ -66,5 +66,9 @@ linuxflip 'xinput disable "device name"' 'xinput enable "device name"'
 ## Appendix: Run Automatically
 
 1. Create a file `~/.xsession` if doesn't exist
-2. Append your `linuxflip` command to it
-3. Make sure it's executable (`chmod +x ~/.xsession`)
+2. Append your `linuxflip` command to it, and remember not to block, e.g.
+   ```sh
+   linuxflip "~/.config/linuxflip/tablet" "~/.config/linuxflip/laptop" &
+   ```
+   (note the `&` at the end)
+4. Make sure it's executable (`chmod +x ~/.xsession`)
