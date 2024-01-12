@@ -62,3 +62,9 @@ Now we can disable/enable a device called "device name" on switch by putting the
 ```
 linuxflip 'xinput disable "device name"' 'xinput enable "device name"'
 ```
+
+## Appendix: Run Automatically
+
+1. Create a file `~/.xsession` if doesn't exist
+2. Append your `linuxflip` command to it
+3. Make sure it's executable (`chmod +x ~/.xsession`)
