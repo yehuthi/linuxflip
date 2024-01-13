@@ -47,5 +47,5 @@ enum linuxflip_result linuxflip_init(struct linuxflip *restrict linuxflip);
 /// \param data Any arbitrary user data you want the hook to have access to.
 void linuxflip_go(struct linuxflip linuxflip, linuxflip_hook hook, void* data);
 
-/// \brief Frees resources used by #linuxflip.
+/// Frees resources used by #linuxflip.
 void linuxflip_free(struct linuxflip linuxflip);
