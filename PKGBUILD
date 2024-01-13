@@ -1,6 +1,6 @@
 # Maintainer: yehuthi <yehuthith@gmail.com>
 pkgname=linuxflip-git
-pkgver=0.1.2
+pkgver=1.0.0
 pkgrel=1
 pkgdesc="Detects and executes commands when the computer switches to and from tablet mode."
 url="https://github.com/yehuthi/linuxflip"
