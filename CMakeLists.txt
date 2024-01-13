@@ -14,3 +14,5 @@ add_executable(exe main.c)
 set_property(TARGET exe PROPERTY OUTPUT_NAME linuxflip)
 target_compile_definitions(exe PRIVATE LINUXFLIP_VERSION=${PROJECT_VERSION})
 target_link_libraries(exe linuxflip)
+
+install(TARGETS exe)
