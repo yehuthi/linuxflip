@@ -9,6 +9,14 @@ struct linuxflip {
 	struct libinput* libinput;
 };
 
+enum linuxflip_result {
+	LINUXFLIP_OK,
+	LINUXFLIP_ERROR_UDEV_INIT,
+	LINUXFLIP_ERROR_LIBINPUT_INIT,
+	LINUXFLIP_ERROR_LIBINPUT_ASSIGN_SEAT,
+	linuxflip_result_count,
+};
+
 /// \brief The mode (tablet mode / laptop mode).
 ///
 /// The mode, which can be #LINUXFLIP_STATE_ON (which seems to indicate tablet mode) or
@@ -26,8 +34,8 @@ typedef unsigned char linuxflip_state;
 /// \returns Whether to keep waiting for more state changes.
 typedef bool (*linuxflip_hook)(linuxflip_state state, void* data);
 
-/// Instantiates a new #linuxflip.
-struct linuxflip linuxflip_new(void);
+/// Initializes a new #linuxflip.
+enum linuxflip_result linuxflip_init(struct linuxflip *restrict linuxflip);
 
 /// \brief Listen to #linuxflip_state changes.
 ///

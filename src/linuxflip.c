@@ -13,19 +13,25 @@ static int open_restricted(const char *path, int flags, void *user_data) {
 
 static void close_restricted(int fd, void *user_data) { close(fd); }
 
-struct linuxflip linuxflip_new(void) {
+enum linuxflip_result linuxflip_init(struct linuxflip *restrict linuxflip) {
 	static const struct libinput_interface file_open_close = {
 		.open_restricted  = open_restricted,
 		.close_restricted = close_restricted,
 	};
-	struct udev *udev = udev_new();
-	struct libinput *li = libinput_udev_create_context(&file_open_close, 0, udev);
-	libinput_udev_assign_seat(li, "seat0");
+	linuxflip->udev = udev_new();
+	if (!linuxflip->udev) return LINUXFLIP_ERROR_UDEV_INIT;
+	linuxflip->libinput = libinput_udev_create_context(&file_open_close, 0, linuxflip->udev);
+	if (!linuxflip->libinput) {
+		udev_unref(linuxflip->udev);
+		return LINUXFLIP_ERROR_LIBINPUT_INIT;
+	}
+	if (libinput_udev_assign_seat(linuxflip->libinput, "seat0") == -1) {
+		libinput_unref(linuxflip->libinput);
+		udev_unref(linuxflip->udev);
+		return LINUXFLIP_ERROR_LIBINPUT_ASSIGN_SEAT;
+	}
 
-	return (struct linuxflip){
-		.udev = udev,
-		.libinput = li,
-	};
+	return LINUXFLIP_OK;
 }
 
 void linuxflip_go(struct linuxflip linuxflip, linuxflip_hook hook, void *data) {

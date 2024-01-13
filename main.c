@@ -50,6 +50,13 @@ static bool hook(linuxflip_state state, void *data) {
 	return true;
 }
 
+const char* linuxflip_result_display[] = {
+	"",
+	"failed to initialize a udev context",
+	"failed to initialize a libinput context",
+	"failed to assign a seat",
+};
+
 int main(int argc, char *argv[]) {
 	if (argc >= 2 && strcmp(argv[1],"--help") == 0) {
 		print_help(argv[0], isatty(STDOUT_FILENO));
@@ -70,7 +77,14 @@ int main(int argc, char *argv[]) {
 	if (argc >= 2) cmd_tablet = cmd_laptop = argv[1];
 	if (argc >= 3) cmd_laptop = argv[2];
 
-	struct linuxflip lf = linuxflip_new();
+	enum linuxflip_result result;
+
+	struct linuxflip lf;
+	result = linuxflip_init(&lf);
+	if (result != LINUXFLIP_OK) {
+		FATAL("%s\n", linuxflip_result_display[result]);
+	}
+	// TODO: check result
 	char* data[] = {
 		cmd_laptop,
 		cmd_tablet,
