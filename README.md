@@ -4,8 +4,8 @@ Detects and executes commands when the computer switches to and from tablet mode
 
 ## Setup
 
-Download the [latest release](https://github.com/yehuthi/linuxflip/releases/latest), and add your user to the `input` group (unless you want to run it as root -- not recommended).
-Then you can simply run it or hook it to a desktop session startup script.
+1. Download the [latest release](https://github.com/yehuthi/linuxflip/releases/latest), or if you're on Arch: `yay -S linuxflip-git`
+2. Add your user to the `input` group (unless you want to run it as root -- not recommended).
 
 > [!TIP]
 > <details>
@@ -17,6 +17,9 @@ Then you can simply run it or hook it to a desktop session startup script.
 > sudo usermod -a input $USER
 > ```
 > </details>
+
+Then you can simply run it or hook it to a desktop session startup script.
+
 
 ## Usage
 
