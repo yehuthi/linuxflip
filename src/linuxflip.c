@@ -6,12 +6,18 @@
 #include <unistd.h>
 #include <poll.h>
 
+#define UNUSED(a) (void)(a)
+
 static int open_restricted(const char *path, int flags, void *user_data) {
+	UNUSED(user_data);
 	int fd = open(path, flags);
 	return fd < 0 ? -errno : fd;
 }
 
-static void close_restricted(int fd, void *user_data) { close(fd); }
+static void close_restricted(int fd, void *user_data) {
+	UNUSED(user_data);
+	close(fd);
+}
 
 enum linuxflip_result linuxflip_init(struct linuxflip *restrict linuxflip) {
 	static const struct libinput_interface file_open_close = {
@@ -66,3 +72,5 @@ void linuxflip_free(struct linuxflip linuxflip) {
 	libinput_unref(linuxflip.libinput);
 	udev_unref(linuxflip.udev);
 }
+
+#undef UNUSED

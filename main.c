@@ -35,7 +35,7 @@ void print_help(const char *exe, bool color) {
 	int (*print_args)(const char* string) = color ? print_highlight : print;
 
 	puts(color ? "\x1b[;1mUsage:\x1b[;22m" : "Usage:");
-	for (int i = 0; i < sizeof(clauses) / sizeof(clauses[0]); i++) {
+	for (size_t i = 0; i < sizeof(clauses) / sizeof(clauses[0]); i++) {
 		printf("  ");
 		print_exe(exe);
 		putc(' ', stdout);
@@ -46,7 +46,8 @@ void print_help(const char *exe, bool color) {
 
 static bool hook(linuxflip_state state, void *data) {
 	char* command = ((char**)data)[state];
-	if (fork() == 0) execl("/bin/sh", "sh", "-c", command, 0);
+	if (fork() == 0)
+		execl("/bin/sh", "sh", "-c", command, (char*)0);
 	return true;
 }
 

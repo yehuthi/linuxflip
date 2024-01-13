@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.1...3.28)
 project(LinuxFlip VERSION 0.1.2)
 
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra")
+
 find_library(LIBINPUT input REQUIRED)
 find_library(LIBUDEV  udev  REQUIRED)
 
