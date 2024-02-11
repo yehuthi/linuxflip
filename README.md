@@ -18,7 +18,7 @@ Detects and executes commands when the computer switches to and from tablet mode
 > ```
 > </details>
 
-Then you can simply run it or hook it to a desktop session startup script.
+Then you can simply run it or [hook](#appendix-run-automatically) it to a desktop session startup script.
 
 
 ## Usage
