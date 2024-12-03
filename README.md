@@ -14,7 +14,7 @@ Detects and executes commands when the computer switches to and from tablet mode
 > Open the terminal (press <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>T</kbd> or find it as you would any other program), and enter:
 >    
 > ```sh
-> sudo usermod -a input $USER
+> sudo usermod -aG input $USER
 > ```
 > </details>
 
